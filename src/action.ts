@@ -46,7 +46,6 @@ const run = async () => {
         }
       }
     `
-
     const vars: Record<string, unknown> = Object.fromEntries(
       Object.entries(queryVars).map(([varName, { value }]) => [varName, value])
     )
@@ -86,6 +85,7 @@ const run = async () => {
   }
 }
 
+
 enum ReviewState {
   APPROVED = 'APPROVED',
   CHANGES_REQUESTED = 'CHANGED_REQUESTED',
@@ -93,6 +93,7 @@ enum ReviewState {
   DISMISSED = 'DISMISSED',
   PENDING = 'PENDING'
 }
+
 
 enum CommentAuthorAssociation {
   COLLABORATOR = 'COLLABORATOR',
@@ -104,11 +105,14 @@ enum CommentAuthorAssociation {
   NONE = 'NONE'
 }
 
+
 const collaboratorAssociation: CommentAuthorAssociation[] = [
   CommentAuthorAssociation.COLLABORATOR,
   CommentAuthorAssociation.MEMBER,
   CommentAuthorAssociation.OWNER
 ]
+
+
 
 /**
  * Is this a pull request event?
@@ -123,6 +127,8 @@ const isPullRequest = (
     number: number
   }
 } => payload.pull_request !== undefined
+
+
 
 /**
  * Is this a pull request review event?
@@ -139,6 +145,8 @@ const isPullRequestReview = (
     }
   }
 } => payload.pull_request_review !== undefined
+
+
 
 // Run the action
 run()
