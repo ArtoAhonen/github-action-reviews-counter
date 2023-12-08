@@ -14665,8 +14665,7 @@ const run = async () => {
         Object.keys(ReviewState)
             .filter(key => /^[a-zA-Z]+$/.test(key))
             .forEach(stateName => {
-            const stateReviewsCount = reviews.filter(review => review.state === stateName)
-                .length;
+            const stateReviewsCount = reviews.filter(review => review.state === stateName).length;
             const outputKey = stateName.toLowerCase();
             debug(`  ${outputKey}: ${stateReviewsCount.toLocaleString('en')}`);
             core.setOutput(outputKey, stateReviewsCount);

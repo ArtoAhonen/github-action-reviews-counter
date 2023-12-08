@@ -74,8 +74,9 @@ const run = async () => {
     Object.keys(ReviewState)
       .filter(key => /^[a-zA-Z]+$/.test(key))
       .forEach(stateName => {
-        const stateReviewsCount = reviews.filter(review => review.state === ((stateName as unknown) as ReviewState))
-          .length
+        const stateReviewsCount = reviews.filter(
+          review => review.state === (stateName as unknown as ReviewState)
+        ).length
         const outputKey = stateName.toLowerCase()
         debug(`  ${outputKey}: ${stateReviewsCount.toLocaleString('en')}`)
         core.setOutput(outputKey, stateReviewsCount)
@@ -85,7 +86,6 @@ const run = async () => {
   }
 }
 
-
 enum ReviewState {
   APPROVED = 'APPROVED',
   CHANGES_REQUESTED = 'CHANGED_REQUESTED',
@@ -93,7 +93,6 @@ enum ReviewState {
   DISMISSED = 'DISMISSED',
   PENDING = 'PENDING'
 }
-
 
 enum CommentAuthorAssociation {
   COLLABORATOR = 'COLLABORATOR',
@@ -105,14 +104,11 @@ enum CommentAuthorAssociation {
   NONE = 'NONE'
 }
 
-
 const collaboratorAssociation: CommentAuthorAssociation[] = [
   CommentAuthorAssociation.COLLABORATOR,
   CommentAuthorAssociation.MEMBER,
   CommentAuthorAssociation.OWNER
 ]
-
-
 
 /**
  * Is this a pull request event?
@@ -127,8 +123,6 @@ const isPullRequest = (
     number: number
   }
 } => payload.pull_request !== undefined
-
-
 
 /**
  * Is this a pull request review event?
@@ -145,8 +139,6 @@ const isPullRequestReview = (
     }
   }
 } => payload.pull_request_review !== undefined
-
-
 
 // Run the action
 run()
